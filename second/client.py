@@ -32,6 +32,10 @@ def run_udp_pinger_client():
     
     packets_received = 0
     total_rtt_ms = 0
+    
+    # Initialize Min/Max RTT trackers
+    min_rtt_ms = float('inf') 
+    max_rtt_ms = float('-inf')
 
     for i in range(1, NUM_PINGS + 1):
         try:
@@ -55,6 +59,10 @@ def run_udp_pinger_client():
             
             # FIXED: Calculate RTT in milliseconds (float) for precision
             rtt_ms = rtt_sec * 1000
+            
+			# Update Min/Max RTT
+            min_rtt_ms = min(min_rtt_ms, rtt_ms)
+            max_rtt_ms = max(max_rtt_ms, rtt_ms)
             
             # Print success message, formatted to two decimal places
             response_message = data.decode()
@@ -82,6 +90,9 @@ def run_udp_pinger_client():
         print(f"\nUDP Pinger Client finished.")
         print(f"Summary: Sent {NUM_PINGS}, Received {packets_received}, Lost {NUM_PINGS - packets_received}")
         print(f"Average RTT: {avg_rtt:.2f} ms")
+        
+		# Display Min/Max RTTs
+        print(f"Min RTT: {min_rtt_ms:.2f} ms, Max RTT: {max_rtt_ms:.2f} ms")
     else:
         print("\nUDP Pinger Client finished. No packets received.")
 
