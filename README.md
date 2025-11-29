@@ -12,6 +12,16 @@ The final semester assignment is to demonstrate how (L7 Application layer) socke
 
 	The client's request is parsed, including IP address, port number, and HTTP method. If the HTTP protocol is present using buffered reader, the server will send a response using buffered writer that manually consutructed HTTP response.
 
+	<<SS DEMO>>
+
 2. Second project: UDP Pinger Client Impelementations
 	
-	The second assignment is to demonstrate how ping messages are implemented using UDP based connections. It written on Golang instead of python at first, until it was changed to python as instructed.
+	The second assignment is to demonstrate how ping messages are implemented using UDP based connections. The server runtime is provided using python. Main assignment is to write up and implement pinger client. It written on Golang instead of python at first, until it was changed to python as instructed.
+
+	Provided python UDP ping server is slightly modified to support debugging purposes.
+
+	The randominess is to simulate UDP transmission error.
+
+	<<SS GOLANG>>
+
+	<<SS PYTHON>>
