@@ -10,7 +10,7 @@ TIMEOUT_SEC = 1.0 # 1 second RTT timeout
 
 # CRITICAL DELAY: The single-threaded server.py tends to stall. 
 # A 2-second delay is used to give the server ample time to loop and reset.
-INTER_PING_DELAY_SEC = 2.0 
+INTER_PING_DELAY_SEC = 1.0 
 
 def run_udp_pinger_client():
     """
@@ -44,21 +44,21 @@ def run_udp_pinger_client():
             start_time = time.time()
             
             # 2. Send the ping message
-            # The client does not need to bind a port; the OS assigns a temporary one.
             client_socket.sendto(message.encode(), server_address)
             
             # 3. Wait for the pong reply (up to 1 second due to settimeout)
-            # The buffer size must be large enough (e.g., 1024 bytes)
             data, server = client_socket.recvfrom(1024)
             
             # 4. Calculate RTT
             end_time = time.time()
             rtt_sec = end_time - start_time
-            rtt_ms = int(rtt_sec * 1000)
             
-            # Print success message
+            # FIXED: Calculate RTT in milliseconds (float) for precision
+            rtt_ms = rtt_sec * 1000
+            
+            # Print success message, formatted to two decimal places
             response_message = data.decode()
-            print(f"PING {i}: Received '{response_message}', RTT: {rtt_ms} ms")
+            print(f"PING {i}: Received '{response_message}', RTT: {rtt_ms:.2f} ms")
             
             packets_received += 1
             total_rtt_ms += rtt_ms
