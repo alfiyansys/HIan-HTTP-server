@@ -9,10 +9,11 @@ import (
 
 // The server's address and port (adjust if necessary based on your server setup)
 const (
-	serverIP   = "127.0.0.1" // Localhost
-	serverPort = "12000"     // Port used in the Kurose & Ross example
-	numPings   = 10
-	timeoutSec = 1
+	serverIP       = "127.0.0.1" // Localhost
+	serverPort     = "12000"     // Port used in the Kurose & Ross example
+	numPings       = 10
+	timeoutSec     = 1
+	interPingDelay = 2000 * time.Millisecond
 )
 
 func main() {
@@ -90,7 +91,7 @@ func main() {
 		}
 
 		// Wait a moment before sending the next ping (optional, but good practice)
-		time.Sleep(1 * time.Second)
+		time.Sleep(interPingDelay)
 	}
 
 	fmt.Println("\nUDP Pinger Client finished.")
