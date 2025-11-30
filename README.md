@@ -12,7 +12,7 @@ The final semester assignment is to demonstrate how (L7 Application layer) socke
 
 	The client's request is parsed, including IP address, port number, and HTTP method. If the HTTP protocol is present using buffered reader, the server will send a response using buffered writer that manually consutructed HTTP response.
 
-	<<SS DEMO>>
+	![RAW TCP based HTTP server access](./assets/http-server.png)
 
 2. Second project: UDP Pinger Client Impelementations
 	
